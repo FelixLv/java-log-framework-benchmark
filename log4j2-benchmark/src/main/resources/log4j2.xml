@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+      <Property name="filename">
+            /tmp/logs/log4j2.log
+      </Property>
+    </Properties>
+
+    <Appenders>
+        <File name="INFO" fileName="${filename}" immediateFlush="true" append="true">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- pattern layout actually uses location, so we need to include it -->
+        <!--<AsyncLogger level="info" includeLocation="true">-->
+            <!--<AppenderRef ref="INFO"/>-->
+        <!--</AsyncLogger>-->
+        <Root level="info" includeLocation="true">
+            <AppenderRef ref="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>

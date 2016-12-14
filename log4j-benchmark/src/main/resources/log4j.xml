@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <appender name="INFO" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/tmp/logs/log4j.log"/>
+        <param name="Append" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="ASYNC-INFO" class="org.apache.log4j.AsyncAppender">
+        <!--默认false-->
+        <param name="locationInfo" value="true"/>
+        <!--默认128-->
+        <param name="bufferSize" value="512"/>
+        <appender-ref ref="INFO"/>
+    </appender>
+
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="INFO" />
+        <!--<appender-ref ref="ASYNC-INFO" />-->
+    </root>
+
+</log4j:configuration>

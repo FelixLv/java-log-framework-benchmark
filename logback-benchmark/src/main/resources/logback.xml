@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <contextName>LogBack Demo</contextName>
+
+    <property name="LOG_HOME" value="/tmp/logs"/>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/logback.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d %level %class [%thread] %m%n
+            </pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/logback-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>90</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="ASYNC-INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <!--默认为false-->
+        <includeCallerData>true</includeCallerData>
+        <!--默认为256-->
+        <queueSize>512</queueSize>
+        <!--默认为-1-->
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="INFO"/>
+    </appender>
+
+    <!--日志输出级别-->
+    <root level="debug">
+        <appender-ref ref="INFO"/>
+        <!--<appender-ref ref="ASYNC-INFO"/>-->
+    </root>
+
+</configuration>
